@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodExpress - Food Delivery App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --accent: #45b7d1;
+            --dark: #2c3e50;
+            --light: #f7f9fc;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .pattern-section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .pattern-title {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .order-item {
+            background: white;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-pending { background: var(--warning); color: white; }
+        .status-preparing { background: var(--accent); color: white; }
+        .status-delivered { background: var(--success); color: white; }
+
+        .payment-option {
+            background: var(--light);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .payment-option:hover {
+            border-color: var(--accent);
+        }
+
+        .payment-option.selected {
+            border-color: var(--success);
+            background: #e8f6f3;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success { background: var(--success); }
+        .notification.error { background: var(--danger); }
+        .notification.info { background: var(--accent); }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">🍕 FoodExpress</div>
+            <ul class="nav-links">
+                <li><a href="#singleton">Singleton</a></li>
+                <li><a href="#factory">Factory</a></li>
+                <li><a href="#abstract-factory">Abstract Factory</a></li>
+                <li><a href="#builder">Builder</a></li>
+                <li><a href="#prototype">Prototype</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Delicious Food Delivered Fast</h1>
+            <p>Experience the power of design patterns in a real food delivery application</p>
+        </section>
+
+        <!-- Singleton Pattern Section -->
+        <section id="singleton" class="pattern-section">
+            <h2 class="pattern-title">1. Singleton Pattern - App Configuration</h2>
+            <div class="card">
+                <h3>Application Configuration Manager</h3>
+                <p>Ensures single instance of app configuration throughout the application</p>
+                <div class="form-group">
+                    <label>API Base URL:</label>
+                    <input type="text" id="apiUrl" class="form-control" value="https://api.foodexpress.com/v1">
+                </div>
+                <div class="form-group">
+                    <label>Theme:</label>
+                    <select id="appTheme" class="form-control">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="auto">Auto</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="updateConfig()">Update Configuration</button>
+                <button class="btn btn-secondary" onclick="showConfig()">Show Current Config</button>
+            </div>
+        </section>
+
+        <!-- Factory Pattern Section -->
+        <section id="factory" class="pattern-section">
+            <h2 class="pattern-title">2. Factory Pattern - Order Creation</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>🍕 Pizza Order</h3>
+                    <p>Create delicious pizza orders with various toppings</p>
+                    <button class="btn" onclick="createOrder('pizza')">Order Pizza</button>
+                </div>
+                <div class="card">
+                    <h3>🍔 Burger Order</h3>
+                    <p>Customize your burger with fresh ingredients</p>
+                    <button class="btn" onclick="createOrder('burger')">Order Burger</button>
+                </div>
+                <div class="card">
+                    <h3>🥗 Salad Order</h3>
+                    <p>Healthy salads with fresh vegetables</p>
+                    <button class="btn" onclick="createOrder('salad')">Order Salad</button>
+                </div>
+            </div>
+            <div id="orderDetails" class="card hidden">
+                <h3>Order Details</h3>
+                <div id="orderContent"></div>
+            </div>
+        </section>
+
+        <!-- Abstract Factory Pattern Section -->
+        <section id="abstract-factory" class="pattern-section">
+            <h2 class="pattern-title">3. Abstract Factory Pattern - Payment Systems</h2>
+            <div class="card">
+                <h3>Select Payment Method</h3>
+                <div id="paymentOptions">
+                    <div class="payment-option" onclick="selectPayment('upi')">
+                        <h4>📱 UPI Payment</h4>
+                        <p>Instant payment using UPI ID</p>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('wallet')">
+                        <h4>👛 Wallet Payment</h4>
+                        <p>Pay using FoodExpress Wallet</p>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('card')">
+                        <h4>💳 Credit/Debit Card</h4>
+                        <p>Secure card payment</p>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('cod')">
+                        <h4>💰 Cash on Delivery</h4>
+                        <p>Pay when you receive your order</p>
+                    </div>
+                </div>
+                <button class="btn btn-success" onclick="processPayment()" id="processPaymentBtn" disabled>
+                    Process Payment
+                </button>
+                <div id="paymentResult" class="card hidden"></div>
+            </div>
+        </section>
+
+        <!-- Builder Pattern Section -->
+        <section id="builder" class="pattern-section">
+            <h2 class="pattern-title">4. Builder Pattern - Custom Meal Builder</h2>
+            <div class="card">
+                <h3>Build Your Custom Meal</h3>
+                <div class="form-group">
+                    <label>Main Course:</label>
+                    <select id="mainCourse" class="form-control">
+                        <option value="">Select Main Course</option>
+                        <option value="grilled_chicken">Grilled Chicken</option>
+                        <option value="paneer_tikka">Paneer Tikka</option>
+                        <option value="fish_fillet">Fish Fillet</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Side Dish:</label>
+                    <select id="sideDish" class="form-control">
+                        <option value="">Select Side Dish</option>
+                        <option value="french_fries">French Fries</option>
+                        <option value="garlic_bread">Garlic Bread</option>
+                        <option value="steamed_vegetables">Steamed Vegetables</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Beverage:</label>
+                    <select id="beverage" class="form-control">
+                        <option value="">Select Beverage</option>
+                        <option value="coke">Coke</option>
+                        <option value="lemonade">Lemonade</option>
+                        <option value="iced_tea">Iced Tea</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Dessert:</label>
+                    <select id="dessert" class="form-control">
+                        <option value="">Select Dessert</option>
+                        <option value="chocolate_cake">Chocolate Cake</option>
+                        <option value="ice_cream">Ice Cream</option>
+                        <option value="fruit_salad">Fruit Salad</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="buildMeal()">Build Meal</button>
+                <div id="mealResult" class="card hidden"></div>
+            </div>
+        </section>
+
+        <!-- Prototype Pattern Section -->
+        <section id="prototype" class="pattern-section">
+            <h2 class="pattern-title">5. Prototype Pattern - Order Templates</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>🚀 Quick Lunch</h3>
+                    <p>Perfect for busy workdays</p>
+                    <p><strong>Includes:</strong> Sandwich + Chips + Soda</p>
+                    <button class="btn" onclick="cloneOrderTemplate('quickLunch')">Use Template</button>
+                </div>
+                <div class="card">
+                    <h3>🏠 Family Dinner</h3>
+                    <p>Complete meal for the family</p>
+                    <p><strong>Includes:</strong> Pizza + Garlic Bread + Salad + Dessert</p>
+                    <button class="btn" onclick="cloneOrderTemplate('familyDinner')">Use Template</button>
+                </div>
+                <div class="card">
+                    <h3>💪 Healthy Choice</h3>
+                    <p>Nutritious and balanced</p>
+                    <p><strong>Includes:</strong> Grilled Chicken + Brown Rice + Steamed Veggies</p>
+                    <button class="btn" onclick="cloneOrderTemplate('healthyChoice')">Use Template</button>
+                </div>
+            </div>
+            <div id="templateResult" class="card hidden">
+                <h3>Cloned Order Template</h3>
+                <div id="templateContent"></div>
+            </div>
+        </section>
+    </div>
+
+    <div id="notification" class="notification hidden"></div>
+
+    <script>
+        // ===============================
+        // 1. SINGLETON PATTERN
+        // ===============================
+        class AppConfig {
+            constructor() {
+                if (AppConfig.instance) {
+                    return AppConfig.instance;
+                }
+                
+                this.apiBaseUrl = 'https://api.foodexpress.com/v1';
+                this.theme = 'light';
+                this.language = 'en';
+                this.maxRetryAttempts = 3;
+                this.timeout = 30000;
+                
+                AppConfig.instance = this;
+                return this;
+            }
+
+            updateConfig(newConfig) {
+                Object.assign(this, newConfig);
+                this.notifyConfigChange();
+            }
+
+            notifyConfigChange() {
+                showNotification('Configuration updated successfully!', 'success');
+            }
+
+            getConfig() {
+                return {
+                    apiBaseUrl: this.apiBaseUrl,
+                    theme: this.theme,
+                    language: this.language,
+                    maxRetryAttempts: this.maxRetryAttempts,
+                    timeout: this.timeout
+                };
+            }
+        }
+
+        // Initialize singleton
+        const appConfig = new AppConfig();
+
+        function updateConfig() {
+            const newConfig = {
+                apiBaseUrl: document.getElementById('apiUrl').value,
+                theme: document.getElementById('appTheme').value
+            };
+            appConfig.updateConfig(newConfig);
+        }
+
+        function showConfig() {
+            const config = appConfig.getConfig();
+            showNotification(
+                `Current Config: ${config.theme} theme, API: ${config.apiBaseUrl}`,
+                'info'
+            );
+        }
+
+        // ===============================
+        // 2. FACTORY PATTERN
+        // ===============================
+        class OrderFactory {
+            createOrder(type, details) {
+                switch (type) {
+                    case 'pizza':
+                        return new PizzaOrder(details);
+                    case 'burger':
+                        return new BurgerOrder(details);
+                    case 'salad':
+                        return new SaladOrder(details);
+                    default:
+                        throw new Error('Unknown order type');
+                }
+            }
+        }
+
+        class PizzaOrder {
+            constructor(details) {
+                this.type = 'pizza';
+                this.name = 'Custom Pizza';
+                this.basePrice = 12.99;
+                this.toppings = details?.toppings || ['cheese', 'tomato sauce'];
+                this.size = details?.size || 'medium';
+                this.crust = details?.crust || 'regular';
+            }
+
+            calculatePrice() {
+                let price = this.basePrice;
+                if (this.size === 'large') price += 4;
+                if (this.size === 'small') price -= 2;
+                price += this.toppings.length * 1.5;
+                return price;
+            }
+
+            getDescription() {
+                return `${this.size.toUpperCase()} ${this.name} with ${this.crust} crust and ${this.toppings.join(', ')}`;
+            }
+        }
+
+        class BurgerOrder {
+            constructor(details) {
+                this.type = 'burger';
+                this.name = 'Gourmet Burger';
+                this.basePrice = 8.99;
+                this.patty = details?.patty || 'beef';
+                this.cheese = details?.cheese || 'cheddar';
+                this.vegetables = details?.vegetables || ['lettuce', 'tomato', 'onion'];
+            }
+
+            calculatePrice() {
+                let price = this.basePrice;
+                if (this.patty === 'premium') price += 3;
+                if (this.cheese === 'premium') price += 2;
+                return price;
+            }
+
+            getDescription() {
+                return `${this.patty.toUpperCase()} Burger with ${this.cheese} cheese and ${this.vegetables.join(', ')}`;
+            }
+        }
+
+        class SaladOrder {
+            constructor(details) {
+                this.type = 'salad';
+                this.name = 'Fresh Salad';
+                this.basePrice = 6.99;
+                this.greens = details?.greens || ['lettuce', 'spinach'];
+                this.vegetables = details?.vegetables || ['cucumber', 'tomato', 'bell pepper'];
+                this.dressing = details?.dressing || 'vinaigrette';
+            }
+
+            calculatePrice() {
+                let price = this.basePrice;
+                price += this.vegetables.length * 0.5;
+                if (this.dressing === 'premium') price += 1.5;
+                return price;
+            }
+
+            getDescription() {
+                return `Fresh Salad with ${this.greens.join(', ')} base, ${this.vegetables.join(', ')} and ${this.dressing} dressing`;
+            }
+        }
+
+        const orderFactory = new OrderFactory();
+
+        function createOrder(type) {
+            const order = orderFactory.createOrder(type);
+            const orderDetails = document.getElementById('orderDetails');
+            const orderContent = document.getElementById('orderContent');
+            
+            orderContent.innerHTML = `
+                <h4>${order.name}</h4>
+                <p><strong>Description:</strong> ${order.getDescription()}</p>
+                <p><strong>Price:</strong> $${order.calculatePrice().toFixed(2)}</p>
+                <p><strong>Estimated Time:</strong> 20-30 minutes</p>
+                <button class="btn btn-success" onclick="confirmOrder('${type}')">Confirm Order</button>
+            `;
+            
+            orderDetails.classList.remove('hidden');
+            showNotification(`${type.charAt(0).toUpperCase() + type.slice(1)} order created!`, 'success');
+        }
+
+        function confirmOrder(type) {
+            showNotification(`Your ${type} order has been confirmed and is being prepared! 🎉`, 'success');
+        }
+
+        // ===============================
+        // 3. ABSTRACT FACTORY PATTERN
+        // ===============================
+        class PaymentFactory {
+            createPaymentProcessor(type) {
+                switch (type) {
+                    case 'upi':
+                        return new UpiPayment();
+                    case 'wallet':
+                        return new WalletPayment();
+                    case 'card':
+                        return new CardPayment();
+                    case 'cod':
+                        return new CODPayment();
+                    default:
+                        throw new Error('Unknown payment type');
+                }
+            }
+        }
+
+        class UpiPayment {
+            processPayment(amount) {
+                return {
+                    success: true,
+                    transactionId: 'UPI_' + Math.random().toString(36).substr(2, 9),
+                    message: `UPI payment of $${amount} processed successfully`,
+                    method: 'UPI'
+                };
+            }
+
+            refundPayment(transactionId) {
+                return {
+                    success: true,
+                    message: `Refund processed for UPI transaction ${transactionId}`
+                };
+            }
+        }
+
+        class WalletPayment {
+            processPayment(amount) {
+                return {
+                    success: true,
+                    transactionId: 'WALLET_' + Math.random().toString(36).substr(2, 9),
+                    message: `Wallet payment of $${amount} processed successfully`,
+                    method: 'Wallet'
+                };
+            }
+
+            refundPayment(transactionId) {
+                return {
+                    success: true,
+                    message: `Refund processed to wallet for transaction ${transactionId}`
+                };
+            }
+        }
+
+        class CardPayment {
+            processPayment(amount) {
+                return {
+                    success: true,
+                    transactionId: 'CARD_' + Math.random().toString(36).substr(2, 9),
+                    message: `Card payment of $${amount} processed successfully`,
+                    method: 'Credit/Debit Card'
+                };
+            }
+
+            refundPayment(transactionId) {
+                return {
+                    success: true,
+                    message: `Refund processed to card for transaction ${transactionId}`
+                };
+            }
+        }
+
+        class CODPayment {
+            processPayment(amount) {
+                return {
+                    success: true,
+                    transactionId: 'COD_' + Math.random().toString(36).substr(2, 9),
+                    message: `Order confirmed with Cash on Delivery - $${amount}`,
+                    method: 'Cash on Delivery'
+                };
+            }
+
+            refundPayment(transactionId) {
+                return {
+                    success: false,
+                    message: 'Refunds not applicable for COD orders'
+                };
+            }
+        }
+
+        const paymentFactory = new PaymentFactory();
+        let selectedPaymentMethod = null;
+
+        function selectPayment(method) {
+            selectedPaymentMethod = method;
+            const options = document.querySelectorAll('.payment-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            document.getElementById('processPaymentBtn').disabled = false;
+        }
+
+        function processPayment() {
+            if (!selectedPaymentMethod) {
+                showNotification('Please select a payment method', 'error');
+                return;
+            }
+
+            const amount = 25.99; // Simulated order amount
+            const processor = paymentFactory.createPaymentProcessor(selectedPaymentMethod);
+            const result = processor.processPayment(amount);
+            
+            const paymentResult = document.getElementById('paymentResult');
+            paymentResult.innerHTML = `
+                <h4>Payment Result</h4>
+                <p><strong>Status:</strong> ${result.success ? '✅ Success' : '❌ Failed'}</p>
+                <p><strong>Method:</strong> ${result.method}</p>
+                <p><strong>Amount:</strong> $${amount}</p>
+                <p><strong>Transaction ID:</strong> ${result.transactionId}</p>
+                <p><strong>Message:</strong> ${result.message}</p>
+            `;
+            paymentResult.classList.remove('hidden');
+            
+            showNotification(result.message, result.success ? 'success' : 'error');
+        }
+
+        // ===============================
+        // 4. BUILDER PATTERN
+        // ===============================
+        class MealBuilder {
+            constructor() {
+            this.meal = new Meal();
+        }
+
+        setMainCourse(mainCourse) {
+            this.meal.mainCourse = mainCourse;
+            return this;
+        }
+
+        setSideDish(sideDish) {
+            this.meal.sideDish = sideDish;
+            return this;
+        }
+
+        setBeverage(beverage) {
+            this.meal.beverage = beverage;
+            return this;
+        }
+
+        setDessert(dessert) {
+            this.meal.dessert = dessert;
+            return this;
+        }
+
+        build() {
+            return this.meal;
+        }
+    }
+
+    class Meal {
+        constructor() {
+            this.mainCourse = '';
+            this.sideDish = '';
+            this.beverage = '';
+            this.dessert = '';
+            this.price = 0;
+        }
+
+        calculatePrice() {
+            let total = 0;
+            const prices = {
+                'grilled_chicken': 8.99,
+                'paneer_tikka': 7.99,
+                'fish_fillet': 9.99,
+                'french_fries': 2.99,
+                'garlic_bread': 3.49,
+                'steamed_vegetables': 2.49,
+                'coke': 1.99,
+                'lemonade': 2.49,
+                'iced_tea': 2.99,
+                'chocolate_cake': 4.99,
+                'ice_cream': 3.99,
+                'fruit_salad': 3.49
+            };
+
+            if (this.mainCourse) total += prices[this.mainCourse] || 0;
+            if (this.sideDish) total += prices[this.sideDish] || 0;
+            if (this.beverage) total += prices[this.beverage] || 0;
+            if (this.dessert) total += prices[this.dessert] || 0;
+
+            this.price = total;
+            return total;
+        }
+
+        getDescription() {
+            const parts = [];
+            if (this.mainCourse) parts.push(`Main: ${this.formatName(this.mainCourse)}`);
+            if (this.sideDish) parts.push(`Side: ${this.formatName(this.sideDish)}`);
+            if (this.beverage) parts.push(`Drink: ${this.formatName(this.beverage)}`);
+            if (this.dessert) parts.push(`Dessert: ${this.formatName(this.dessert)}`);
+            return parts.join(' | ');
+        }
+
+        formatName(name) {
+            return name.split('_').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ');
+        }
+    }
+
+    function buildMeal() {
+        const mainCourse = document.getElementById('mainCourse').value;
+        const sideDish = document.getElementById('sideDish').value;
+        const beverage = document.getElementById('beverage').value;
+        const dessert = document.getElementById('dessert').value;
+
+        if (!mainCourse) {
+            showNotification('Please select a main course', 'error');
+            return;
+        }
+
+        const builder = new MealBuilder();
+        const meal = builder
+            .setMainCourse(mainCourse)
+            .setSideDish(sideDish)
+            .setBeverage(beverage)
+            .setDessert(dessert)
+            .build();
+
+        const totalPrice = meal.calculatePrice();
+
+        const mealResult = document.getElementById('mealResult');
+        mealResult.innerHTML = `
+            <h4>Your Custom Meal</h4>
+            <p><strong>Description:</strong> ${meal.getDescription()}</p>
+            <p><strong>Total Price:</strong> $${totalPrice.toFixed(2)}</p>
+            <p><strong>Nutrition Info:</strong> Balanced meal with proteins, carbs, and vitamins</p>
+            <button class="btn btn-success" onclick="addToCart()">Add to Cart</button>
+        `;
+        mealResult.classList.remove('hidden');
+
+        showNotification('Custom meal built successfully!', 'success');
+    }
+
+    function addToCart() {
+        showNotification('Meal added to cart! 🛒', 'success');
+    }
+
+    // ===============================
+    // 5. PROTOTYPE PATTERN
+    // ===============================
+    class OrderTemplate {
+        constructor(name, items, basePrice) {
+            this.name = name;
+            this.items = items;
+            this.basePrice = basePrice;
+            this.customizations = [];
+        }
+
+        clone() {
+            const cloned = Object.create(Object.getPrototypeOf(this));
+            Object.assign(cloned, this);
+            cloned.items = [...this.items];
+            cloned.customizations = [...this.customizations];
+            return cloned;
+        }
+
+        customize(additionalItems) {
+            this.customizations.push(...additionalItems);
+        }
+
+        getTotalPrice() {
+            return this.basePrice + (this.customizations.length * 2.99);
+        }
+
+        getDescription() {
+            const allItems = [...this.items, ...this.customizations];
+            return `${this.name}: ${allItems.join(' + ')} | Total: $${this.getTotalPrice().toFixed(2)}`;
+        }
+    }
+
+    // Prototype templates
+    const orderTemplates = {
+        quickLunch: new OrderTemplate('Quick Lunch', 
+            ['Sandwich', 'Chips', 'Soda'], 9.99),
+        familyDinner: new OrderTemplate('Family Dinner',
+            ['Large Pizza', 'Garlic Bread', 'Salad', 'Dessert'], 29.99),
+        healthyChoice: new OrderTemplate('Healthy Choice',
+            ['Grilled Chicken', 'Brown Rice', 'Steamed Vegetables'], 14.99)
+    };
+
+    function cloneOrderTemplate(templateName) {
+        const template = orderTemplates[templateName];
+        if (!template) {
+            showNotification('Template not found', 'error');
+            return;
+        }
+
+        const clonedOrder = template.clone();
+        
+        // Simulate some customization
+        const customizations = ['Extra Sauce', 'Diet Coke'];
+        clonedOrder.customize(customizations);
+
+        const templateResult = document.getElementById('templateResult');
+        const templateContent = document.getElementById('templateContent');
+        
+        templateContent.innerHTML = `
+            <h4>${clonedOrder.name}</h4>
+            <p><strong>Original Items:</strong> ${template.items.join(', ')}</p>
+            <p><strong>Customizations:</strong> ${clonedOrder.customizations.join(', ')}</p>
+            <p><strong>Base Price:</strong> $${template.basePrice.toFixed(2)}</p>
+            <p><strong>Customization Cost:</strong> $${(clonedOrder.customizations.length * 2.99).toFixed(2)}</p>
+            <p><strong>Total Price:</strong> $${clonedOrder.getTotalPrice().toFixed(2)}</p>
+            <button class="btn btn-success" onclick="useClonedTemplate('${templateName}')">Use This Template</button>
+        `;
+        
+        templateResult.classList.remove('hidden');
+        showNotification(`${templateName} template cloned and customized!`, 'success');
+    }
+
+    function useClonedTemplate(templateName) {
+        showNotification(`Order placed using ${templateName} template! 🚀`, 'success');
+    }
+
+    // ===============================
+    // UTILITY FUNCTIONS
+    // ===============================
+    function showNotification(message, type) {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.className = `notification ${type}`;
+        notification.classList.add('show');
+        
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 3000);
+    }
+
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', function() {
+        showNotification('Welcome to FoodExpress! Explore different design patterns in action.', 'info');
+    });
+    </script>
+</body>
+</html>
