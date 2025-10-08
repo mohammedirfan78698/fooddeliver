@@ -1,980 +1,3269 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FoodExpress - Food Delivery App</title>
+
+    <title>FoodExpress - Food Delivery</title>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
         :root {
+
             --primary: #ff6b6b;
+
             --secondary: #4ecdc4;
-            --accent: #45b7d1;
-            --dark: #2c3e50;
-            --light: #f7f9fc;
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --danger: #e74c3c;
+
+            --accent: #ffd166;
+
+            --dark: #1a1a2e;
+
+            --light: #f8f9fa;
+
+            --success: #06d6a0;
+
+            --warning: #ffd166;
+
+            --danger: #ef476f;
+
+        }
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--light);
+
+            background-color: #f5f5f5;
+
             color: var(--dark);
+
             line-height: 1.6;
+
         }
 
         .container {
+
             max-width: 1200px;
+
             margin: 0 auto;
-            padding: 20px;
+
+            padding: 0 20px;
+
         }
 
         header {
+
             background: white;
+
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
             position: sticky;
+
             top: 0;
+
             z-index: 100;
+
         }
 
         .navbar {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
-            padding: 1rem 2rem;
+
+            padding: 1rem 0;
+
         }
 
         .logo {
-            font-size: 1.8rem;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 1.5rem;
+
             font-weight: bold;
+
             color: var(--primary);
+
+        }
+
+        .logo i {
+
+            font-size: 1.8rem;
+
         }
 
         .nav-links {
+
             display: flex;
+
             gap: 2rem;
-            list-style: none;
+
         }
 
         .nav-links a {
+
             text-decoration: none;
+
             color: var(--dark);
+
             font-weight: 500;
+
             transition: color 0.3s;
+
         }
 
         .nav-links a:hover {
+
             color: var(--primary);
+
         }
 
-        .hero {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            border-radius: 15px;
-            margin: 2rem 0;
-        }
+        .user-actions {
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
+            display: flex;
 
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
+            gap: 1rem;
 
-        .pattern-section {
-            background: white;
-            padding: 2rem;
-            margin: 2rem 0;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .pattern-title {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--light);
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .card {
-            background: var(--light);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--secondary);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .card h3 {
-            color: var(--dark);
-            margin-bottom: 1rem;
         }
 
         .btn {
-            background: var(--primary);
-            color: white;
+
+            padding: 0.5rem 1rem;
+
             border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
+
+            border-radius: 5px;
+
             cursor: pointer;
-            font-weight: 600;
+
+            font-weight: 500;
+
             transition: all 0.3s;
-            margin: 0.5rem;
+
         }
 
-        .btn:hover {
-            background: var(--accent);
-            transform: translateY(-2px);
+        .btn-primary {
+
+            background: var(--primary);
+
+            color: white;
+
         }
 
         .btn-secondary {
+
             background: var(--secondary);
+
+            color: white;
+
         }
 
-        .btn-success {
-            background: var(--success);
+        .btn-outline {
+
+            background: transparent;
+
+            border: 1px solid var(--primary);
+
+            color: var(--primary);
+
         }
 
-        .form-group {
+        .btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+        }
+
+        .hero {
+
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+
+            color: white;
+
+            padding: 4rem 0;
+
+            text-align: center;
+
+            margin-bottom: 2rem;
+
+        }
+
+        .hero h1 {
+
+            font-size: 3rem;
+
             margin-bottom: 1rem;
+
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+        .hero p {
+
+            font-size: 1.2rem;
+
+            max-width: 600px;
+
+            margin: 0 auto 2rem;
+
         }
 
-        .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
+        .search-bar {
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .order-item {
-            background: white;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 8px;
-            border-left: 4px solid var(--success);
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+
+            max-width: 600px;
+
+            margin: 0 auto;
+
         }
 
-        .status-badge {
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
+        .search-bar input {
+
+            flex: 1;
+
+            padding: 0.8rem 1rem;
+
+            border: none;
+
+            border-radius: 5px 0 0 5px;
+
+            font-size: 1rem;
+
         }
 
-        .status-pending { background: var(--warning); color: white; }
-        .status-preparing { background: var(--accent); color: white; }
-        .status-delivered { background: var(--success); color: white; }
+        .search-bar button {
 
-        .payment-option {
-            background: var(--light);
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-radius: 8px;
+            background: var(--dark);
+
+            color: white;
+
+            border: none;
+
+            padding: 0 1.5rem;
+
+            border-radius: 0 5px 5px 0;
+
             cursor: pointer;
+
+        }
+
+        .section {
+
+            padding: 3rem 0;
+
+        }
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 2rem;
+
+            font-size: 2rem;
+
+            color: var(--dark);
+
+        }
+
+        .restaurants-grid, .cart-items, .order-history {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+            gap: 2rem;
+
+        }
+
+        .restaurant-card, .cart-item, .order-card {
+
+            background: white;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+            transition: transform 0.3s;
+
+        }
+
+        .restaurant-card:hover, .cart-item:hover, .order-card:hover {
+
+            transform: translateY(-5px);
+
+        }
+
+        .restaurant-img {
+
+            height: 200px;
+
+            background-size: cover;
+
+            background-position: center;
+
+        }
+
+        .restaurant-info, .cart-info, .order-info {
+
+            padding: 1.5rem;
+
+        }
+
+        .restaurant-name {
+
+            font-size: 1.3rem;
+
+            margin-bottom: 0.5rem;
+
+        }
+
+        .restaurant-cuisine {
+
+            color: #666;
+
+            margin-bottom: 1rem;
+
+        }
+
+        .restaurant-rating {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            color: var(--warning);
+
+        }
+
+        .cart-item {
+
+            display: flex;
+
+        }
+
+        .cart-img {
+
+            width: 100px;
+
+            height: 100px;
+
+            background-size: cover;
+
+            background-position: center;
+
+        }
+
+        .cart-details {
+
+            flex: 1;
+
+            padding: 1rem;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+        }
+
+        .cart-controls {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+        .quantity-btn {
+
+            width: 30px;
+
+            height: 30px;
+
+            border-radius: 50%;
+
+            border: none;
+
+            background: var(--light);
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+        .tabs {
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-bottom: 2rem;
+
+            border-bottom: 1px solid #ddd;
+
+        }
+
+        .tab {
+
+            padding: 1rem 2rem;
+
+            cursor: pointer;
+
+            border-bottom: 3px solid transparent;
+
+        }
+
+        .tab.active {
+
+            border-bottom: 3px solid var(--primary);
+
+            color: var(--primary);
+
+            font-weight: bold;
+
+        }
+
+        .tab-content {
+
+            display: none;
+
+        }
+
+        .tab-content.active {
+
+            display: block;
+
+        }
+
+        .payment-methods {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+            gap: 1rem;
+
+            margin-bottom: 2rem;
+
+        }
+
+        .payment-method {
+
+            border: 2px solid #ddd;
+
+            border-radius: 10px;
+
+            padding: 1.5rem;
+
+            text-align: center;
+
+            cursor: pointer;
+
             transition: all 0.3s;
-            border: 2px solid transparent;
+
         }
 
-        .payment-option:hover {
-            border-color: var(--accent);
+        .payment-method:hover {
+
+            border-color: var(--primary);
+
         }
 
-        .payment-option.selected {
-            border-color: var(--success);
-            background: #e8f6f3;
+        .payment-method.selected {
+
+            border-color: var(--primary);
+
+            background: rgba(255, 107, 107, 0.1);
+
+        }
+
+        .payment-icon {
+
+            font-size: 2rem;
+
+            margin-bottom: 0.5rem;
+
+            color: var(--primary);
+
+        }
+
+        .order-summary {
+
+            background: white;
+
+            border-radius: 10px;
+
+            padding: 2rem;
+
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        }
+
+        .summary-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 0.5rem 0;
+
+            border-bottom: 1px solid #eee;
+
+        }
+
+        .summary-total {
+
+            font-weight: bold;
+
+            font-size: 1.2rem;
+
+            border-bottom: none;
+
         }
 
         .notification {
+
             position: fixed;
+
             top: 20px;
+
             right: 20px;
+
             padding: 1rem 1.5rem;
-            border-radius: 8px;
+
+            background: var(--success);
+
             color: white;
-            font-weight: 600;
-            z-index: 1000;
-            transform: translateX(400px);
+
+            border-radius: 5px;
+
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+            transform: translateX(150%);
+
             transition: transform 0.3s;
+
+            z-index: 1000;
+
         }
 
         .notification.show {
+
             transform: translateX(0);
+
         }
 
-        .notification.success { background: var(--success); }
-        .notification.error { background: var(--danger); }
-        .notification.info { background: var(--accent); }
+        .modal {
 
-        .hidden {
             display: none;
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: rgba(0,0,0,0.5);
+
+            z-index: 1000;
+
+            align-items: center;
+
+            justify-content: center;
+
         }
 
-        .loading {
-            text-align: center;
+        .modal.show {
+
+            display: flex;
+
+        }
+
+        .modal-content {
+
+            background: white;
+
+            border-radius: 10px;
+
             padding: 2rem;
+
+            max-width: 500px;
+
+            width: 90%;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
         }
 
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
+        .modal-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 1.5rem;
+
+        }
+
+        .close-modal {
+
+            background: none;
+
+            border: none;
+
+            font-size: 1.5rem;
+
+            cursor: pointer;
+
+            color: #666;
+
+        }
+
+        .form-group {
+
+            margin-bottom: 1.5rem;
+
+        }
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 0.5rem;
+
+            font-weight: 500;
+
+        }
+
+        .form-group input, .form-group select {
+
+            width: 100%;
+
+            padding: 0.8rem;
+
+            border: 1px solid #ddd;
+
+            border-radius: 5px;
+
+            font-size: 1rem;
+
+        }
+
+        .clone-option {
+
+            background: var(--light);
+
+            padding: 1rem;
+
+            border-radius: 5px;
+
+            margin-bottom: 1rem;
+
+            cursor: pointer;
+
+            transition: background 0.3s;
+
+        }
+
+        .clone-option:hover {
+
+            background: #e9ecef;
+
+        }
+
+        .auth-container {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 80vh;
+
+        }
+
+        .auth-form {
+
+            background: white;
+
+            padding: 2rem;
+
+            border-radius: 10px;
+
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+            width: 100%;
+
+            max-width: 400px;
+
+        }
+
+        .auth-form h2 {
+
+            text-align: center;
+
+            margin-bottom: 1.5rem;
+
+            color: var(--primary);
+
+        }
+
+        .auth-switch {
+
+            text-align: center;
+
+            margin-top: 1rem;
+
+        }
+
+        .auth-switch a {
+
+            color: var(--primary);
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+        }
+
+        .user-profile {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+        .user-avatar {
+
             width: 40px;
+
             height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .food-item {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 0.5rem 0;
+
+            border-bottom: 1px solid #eee;
+
+        }
+
+        .food-item:last-child {
+
+            border-bottom: none;
+
         }
 
         @media (max-width: 768px) {
+
             .navbar {
+
                 flex-direction: column;
+
                 gap: 1rem;
+
             }
-            
+
             .nav-links {
+
                 gap: 1rem;
+
             }
-            
+
             .hero h1 {
+
                 font-size: 2rem;
+
             }
-            
-            .card-grid {
+
+            .restaurants-grid, .cart-items, .order-history {
+
                 grid-template-columns: 1fr;
+
             }
+
         }
+
     </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
+
 <body>
+
+    <!-- Header -->
+
     <header>
-        <nav class="navbar">
-            <div class="logo">🍕 FoodExpress</div>
-            <ul class="nav-links">
-                <li><a href="#singleton">Singleton</a></li>
-                <li><a href="#factory">Factory</a></li>
-                <li><a href="#abstract-factory">Abstract Factory</a></li>
-                <li><a href="#builder">Builder</a></li>
-                <li><a href="#prototype">Prototype</a></li>
-            </ul>
-        </nav>
+
+        <div class="container">
+
+            <nav class="navbar">
+
+                <div class="logo">
+
+                    <i class="fas fa-utensils"></i>
+
+                    <span>FoodExpress</span>
+
+                </div>
+
+                <div class="nav-links">
+
+                    <a href="#" class="active">Home</a>
+
+                    <a href="#restaurants">Restaurants</a>
+
+                    <a href="#cart">Cart</a>
+
+                    <a href="#orders">Orders</a>
+
+                </div>
+
+                <div class="user-actions">
+
+                    <div id="user-profile" class="user-profile" style="display: none;">
+
+                        <div class="user-avatar" id="user-avatar">U</div>
+
+                        <span id="username">User</span>
+
+                        <button class="btn btn-outline" id="logoutBtn">Logout</button>
+
+                    </div>
+
+                    <div id="auth-buttons">
+
+                        <button class="btn btn-outline" id="loginBtn">Login</button>
+
+                        <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+
+                    </div>
+
+                </div>
+
+            </nav>
+
+        </div>
+
     </header>
 
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <div class="container">
+
+            <h1>Delicious food delivered to your door</h1>
+
+            <p>Order from your favorite restaurants and enjoy a fresh meal at home</p>
+
+            <div class="search-bar">
+
+                <input type="text" placeholder="Search for restaurants or food...">
+
+                <button><i class="fas fa-search"></i></button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Main Content -->
+
     <div class="container">
-        <section class="hero">
-            <h1>Delicious Food Delivered Fast</h1>
-            <p>Experience the power of design patterns in a real food delivery application</p>
-        </section>
 
-        <!-- Singleton Pattern Section -->
-        <section id="singleton" class="pattern-section">
-            <h2 class="pattern-title">1. Singleton Pattern - App Configuration</h2>
-            <div class="card">
-                <h3>Application Configuration Manager</h3>
-                <p>Ensures single instance of app configuration throughout the application</p>
-                <div class="form-group">
-                    <label>API Base URL:</label>
-                    <input type="text" id="apiUrl" class="form-control" value="https://api.foodexpress.com/v1">
-                </div>
-                <div class="form-group">
-                    <label>Theme:</label>
-                    <select id="appTheme" class="form-control">
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
-                        <option value="auto">Auto</option>
-                    </select>
-                </div>
-                <button class="btn" onclick="updateConfig()">Update Configuration</button>
-                <button class="btn btn-secondary" onclick="showConfig()">Show Current Config</button>
-            </div>
-        </section>
+        <!-- Tabs -->
 
-        <!-- Factory Pattern Section -->
-        <section id="factory" class="pattern-section">
-            <h2 class="pattern-title">2. Factory Pattern - Order Creation</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <h3>🍕 Pizza Order</h3>
-                    <p>Create delicious pizza orders with various toppings</p>
-                    <button class="btn" onclick="createOrder('pizza')">Order Pizza</button>
-                </div>
-                <div class="card">
-                    <h3>🍔 Burger Order</h3>
-                    <p>Customize your burger with fresh ingredients</p>
-                    <button class="btn" onclick="createOrder('burger')">Order Burger</button>
-                </div>
-                <div class="card">
-                    <h3>🥗 Salad Order</h3>
-                    <p>Healthy salads with fresh vegetables</p>
-                    <button class="btn" onclick="createOrder('salad')">Order Salad</button>
-                </div>
-            </div>
-            <div id="orderDetails" class="card hidden">
-                <h3>Order Details</h3>
-                <div id="orderContent"></div>
-            </div>
-        </section>
+        <div class="tabs">
 
-        <!-- Abstract Factory Pattern Section -->
-        <section id="abstract-factory" class="pattern-section">
-            <h2 class="pattern-title">3. Abstract Factory Pattern - Payment Systems</h2>
-            <div class="card">
-                <h3>Select Payment Method</h3>
-                <div id="paymentOptions">
-                    <div class="payment-option" onclick="selectPayment('upi')">
-                        <h4>📱 UPI Payment</h4>
-                        <p>Instant payment using UPI ID</p>
-                    </div>
-                    <div class="payment-option" onclick="selectPayment('wallet')">
-                        <h4>👛 Wallet Payment</h4>
-                        <p>Pay using FoodExpress Wallet</p>
-                    </div>
-                    <div class="payment-option" onclick="selectPayment('card')">
-                        <h4>💳 Credit/Debit Card</h4>
-                        <p>Secure card payment</p>
-                    </div>
-                    <div class="payment-option" onclick="selectPayment('cod')">
-                        <h4>💰 Cash on Delivery</h4>
-                        <p>Pay when you receive your order</p>
-                    </div>
-                </div>
-                <button class="btn btn-success" onclick="processPayment()" id="processPaymentBtn" disabled>
-                    Process Payment
-                </button>
-                <div id="paymentResult" class="card hidden"></div>
-            </div>
-        </section>
+            <div class="tab active" data-tab="restaurants">Restaurants</div>
 
-        <!-- Builder Pattern Section -->
-        <section id="builder" class="pattern-section">
-            <h2 class="pattern-title">4. Builder Pattern - Custom Meal Builder</h2>
-            <div class="card">
-                <h3>Build Your Custom Meal</h3>
-                <div class="form-group">
-                    <label>Main Course:</label>
-                    <select id="mainCourse" class="form-control">
-                        <option value="">Select Main Course</option>
-                        <option value="grilled_chicken">Grilled Chicken</option>
-                        <option value="paneer_tikka">Paneer Tikka</option>
-                        <option value="fish_fillet">Fish Fillet</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Side Dish:</label>
-                    <select id="sideDish" class="form-control">
-                        <option value="">Select Side Dish</option>
-                        <option value="french_fries">French Fries</option>
-                        <option value="garlic_bread">Garlic Bread</option>
-                        <option value="steamed_vegetables">Steamed Vegetables</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Beverage:</label>
-                    <select id="beverage" class="form-control">
-                        <option value="">Select Beverage</option>
-                        <option value="coke">Coke</option>
-                        <option value="lemonade">Lemonade</option>
-                        <option value="iced_tea">Iced Tea</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Dessert:</label>
-                    <select id="dessert" class="form-control">
-                        <option value="">Select Dessert</option>
-                        <option value="chocolate_cake">Chocolate Cake</option>
-                        <option value="ice_cream">Ice Cream</option>
-                        <option value="fruit_salad">Fruit Salad</option>
-                    </select>
-                </div>
-                <button class="btn" onclick="buildMeal()">Build Meal</button>
-                <div id="mealResult" class="card hidden"></div>
-            </div>
-        </section>
+            <div class="tab" data-tab="cart">My Cart</div>
 
-        <!-- Prototype Pattern Section -->
-        <section id="prototype" class="pattern-section">
-            <h2 class="pattern-title">5. Prototype Pattern - Order Templates</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <h3>🚀 Quick Lunch</h3>
-                    <p>Perfect for busy workdays</p>
-                    <p><strong>Includes:</strong> Sandwich + Chips + Soda</p>
-                    <button class="btn" onclick="cloneOrderTemplate('quickLunch')">Use Template</button>
-                </div>
-                <div class="card">
-                    <h3>🏠 Family Dinner</h3>
-                    <p>Complete meal for the family</p>
-                    <p><strong>Includes:</strong> Pizza + Garlic Bread + Salad + Dessert</p>
-                    <button class="btn" onclick="cloneOrderTemplate('familyDinner')">Use Template</button>
-                </div>
-                <div class="card">
-                    <h3>💪 Healthy Choice</h3>
-                    <p>Nutritious and balanced</p>
-                    <p><strong>Includes:</strong> Grilled Chicken + Brown Rice + Steamed Veggies</p>
-                    <button class="btn" onclick="cloneOrderTemplate('healthyChoice')">Use Template</button>
-                </div>
+            <div class="tab" data-tab="orders">Order History</div>
+
+            <div class="tab" data-tab="patterns">Design Patterns</div>
+
+        </div>
+
+        <!-- Restaurants Tab -->
+
+        <div class="tab-content active" id="restaurants-tab">
+
+            <h2 class="section-title">Popular Restaurants</h2>
+
+            <div class="restaurants-grid" id="restaurants-container">
+
+                <!-- Restaurant cards will be dynamically added here -->
+
             </div>
-            <div id="templateResult" class="card hidden">
-                <h3>Cloned Order Template</h3>
-                <div id="templateContent"></div>
+
+        </div>
+
+        <!-- Cart Tab -->
+
+        <div class="tab-content" id="cart-tab">
+
+            <h2 class="section-title">My Cart</h2>
+
+            <div class="cart-items" id="cart-container">
+
+                <!-- Cart items will be dynamically added here -->
+
             </div>
-        </section>
+
+            <div class="order-summary" id="order-summary">
+
+                <div class="summary-row">
+
+                    <span>Subtotal:</span>
+
+                    <span id="subtotal">₹0</span>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>Delivery Fee:</span>
+
+                    <span id="delivery-fee">₹40</span>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>Tax:</span>
+
+                    <span id="tax">₹0</span>
+
+                </div>
+
+                <div class="summary-row summary-total">
+
+                    <span>Total:</span>
+
+                    <span id="total">₹40</span>
+
+                </div>
+
+                <button class="btn btn-primary" id="checkout-btn" style="width: 100%; margin-top: 1.5rem;">Proceed to Checkout</button>
+
+            </div>
+
+        </div>
+
+        <!-- Orders Tab -->
+
+        <div class="tab-content" id="orders-tab">
+
+            <h2 class="section-title">Order History</h2>
+
+            <div class="order-history" id="orders-container">
+
+                <!-- Order cards will be dynamically added here -->
+
+            </div>
+
+        </div>
+
+        <!-- Design Patterns Tab -->
+
+        <div class="tab-content" id="patterns-tab">
+
+            <h2 class="section-title">Creational Design Patterns Demo</h2>
+
+            
+
+            <div class="form-group">
+
+                <h3>1. Singleton Pattern (App Configuration)</h3>
+
+                <p>Current Theme: <span id="current-theme">Light</span></p>
+
+                <button class="btn btn-secondary" id="toggle-theme">Toggle Theme</button>
+
+            </div>
+
+            <div class="form-group">
+
+                <h3>2. Factory Pattern (Restaurant Creation)</h3>
+
+                <label for="restaurant-type">Select Restaurant Type:</label>
+
+                <select id="restaurant-type">
+
+                    <option value="veg">Vegetarian</option>
+
+                    <option value="nonveg">Non-Vegetarian</option>
+
+                    <option value="vegan">Vegan</option>
+
+                </select>
+
+                <button class="btn btn-secondary" id="create-restaurant">Create Restaurant</button>
+
+                <div id="factory-output" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 5px;"></div>
+
+            </div>
+
+            <div class="form-group">
+
+                <h3>3. Abstract Factory Pattern (Payment Systems)</h3>
+
+                <label for="payment-region">Select Region:</label>
+
+                <select id="payment-region">
+
+                    <option value="india">India</option>
+
+                    <option value="us">United States</option>
+
+                    <option value="europe">Europe</option>
+
+                </select>
+
+                <button class="btn btn-secondary" id="setup-payments">Setup Payment Methods</button>
+
+                <div id="abstract-factory-output" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 5px;"></div>
+
+            </div>
+
+            <div class="form-group">
+
+                <h3>4. Builder Pattern (Meal Customization)</h3>
+
+                <button class="btn btn-secondary" id="open-meal-builder">Customize Your Meal</button>
+
+                <div id="builder-output" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 5px;"></div>
+
+            </div>
+
+            <div class="form-group">
+
+                <h3>5. Prototype Pattern (Order Cloning)</h3>
+
+                <p>Select an order to clone:</p>
+
+                <div id="clone-options">
+
+                    <!-- Clone options will be added here -->
+
+                </div>
+
+                <div id="prototype-output" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 5px;"></div>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div id="notification" class="notification hidden"></div>
+    <!-- Checkout Modal -->
+
+    <div class="modal" id="checkout-modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>Checkout</h2>
+
+                <button class="close-modal">&times;</button>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="delivery-address">Delivery Address</label>
+
+                <input type="text" id="delivery-address" placeholder="Enter your delivery address">
+
+            </div>
+
+            <div class="form-group">
+
+                <h3>Select Payment Method</h3>
+
+                <div class="payment-methods" id="payment-methods">
+
+                    <!-- Payment methods will be dynamically added here -->
+
+                </div>
+
+            </div>
+
+            <button class="btn btn-primary" id="place-order-btn" style="width: 100%;">Place Order</button>
+
+        </div>
+
+    </div>
+
+    <!-- Meal Builder Modal -->
+
+    <div class="modal" id="meal-builder-modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>Customize Your Meal</h2>
+
+                <button class="close-modal">&times;</button>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="main-course">Main Course</label>
+
+                <select id="main-course">
+
+                    <option value="paneer-tikka">Paneer Tikka</option>
+
+                    <option value="chicken-biryani">Chicken Biryani</option>
+
+                    <option value="veg-biryani">Veg Biryani</option>
+
+                    <option value="butter-chicken">Butter Chicken</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="side-dish">Side Dish</label>
+
+                <select id="side-dish">
+
+                    <option value="naan">Naan</option>
+
+                    <option value="roti">Roti</option>
+
+                    <option value="rice">Rice</option>
+
+                    <option value="salad">Salad</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="beverage">Beverage</label>
+
+                <select id="beverage">
+
+                    <option value="coke">Coke</option>
+
+                    <option value="pepsi">Pepsi</option>
+
+                    <option value="water">Water</option>
+
+                    <option value="juice">Juice</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="dessert">Dessert</label>
+
+                <select id="dessert">
+
+                    <option value="ice-cream">Ice Cream</option>
+
+                    <option value="gulab-jamun">Gulab Jamun</option>
+
+                    <option value="none">None</option>
+
+                </select>
+
+            </div>
+
+            <button class="btn btn-primary" id="build-meal-btn" style="width: 100%;">Build Meal</button>
+
+        </div>
+
+    </div>
+
+    <!-- Login Modal -->
+
+    <div class="modal" id="login-modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>Login to FoodExpress</h2>
+
+                <button class="close-modal">&times;</button>
+
+            </div>
+
+            <div class="auth-form">
+
+                <div class="form-group">
+
+                    <label for="login-email">Email</label>
+
+                    <input type="email" id="login-email" placeholder="Enter your email">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="login-password">Password</label>
+
+                    <input type="password" id="login-password" placeholder="Enter your password">
+
+                </div>
+
+                <button class="btn btn-primary" id="login-submit" style="width: 100%;">Login</button>
+
+                <div class="auth-switch">
+
+                    Don't have an account? <a id="switch-to-signup">Sign Up</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Signup Modal -->
+
+    <div class="modal" id="signup-modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>Create an Account</h2>
+
+                <button class="close-modal">&times;</button>
+
+            </div>
+
+            <div class="auth-form">
+
+                <div class="form-group">
+
+                    <label for="signup-name">Full Name</label>
+
+                    <input type="text" id="signup-name" placeholder="Enter your full name">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="signup-email">Email</label>
+
+                    <input type="email" id="signup-email" placeholder="Enter your email">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="signup-password">Password</label>
+
+                    <input type="password" id="signup-password" placeholder="Create a password">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="signup-phone">Phone Number</label>
+
+                    <input type="tel" id="signup-phone" placeholder="Enter your phone number">
+
+                </div>
+
+                <button class="btn btn-primary" id="signup-submit" style="width: 100%;">Create Account</button>
+
+                <div class="auth-switch">
+
+                    Already have an account? <a id="switch-to-login">Login</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Notification -->
+
+    <div class="notification" id="notification">
+
+        <span id="notification-text">Order placed successfully!</span>
+
+    </div>
 
     <script>
+
         // ===============================
+
         // 1. SINGLETON PATTERN
+
         // ===============================
+
         class AppConfig {
+
             constructor() {
+
                 if (AppConfig.instance) {
+
                     return AppConfig.instance;
+
                 }
+
                 
-                this.apiBaseUrl = 'https://api.foodexpress.com/v1';
+
                 this.theme = 'light';
+
                 this.language = 'en';
-                this.maxRetryAttempts = 3;
-                this.timeout = 30000;
-                
+
+                this.currency = '₹';
+
                 AppConfig.instance = this;
-                return this;
+
             }
 
-            updateConfig(newConfig) {
-                Object.assign(this, newConfig);
-                this.notifyConfigChange();
+            
+
+            setTheme(theme) {
+
+                this.theme = theme;
+
+                document.body.style.backgroundColor = theme === 'dark' ? '#1a1a2e' : '#f5f5f5';
+
+                document.body.style.color = theme === 'dark' ? 'white' : '#1a1a2e';
+
             }
 
-            notifyConfigChange() {
-                showNotification('Configuration updated successfully!', 'success');
+            
+
+            getTheme() {
+
+                return this.theme;
+
             }
 
-            getConfig() {
-                return {
-                    apiBaseUrl: this.apiBaseUrl,
-                    theme: this.theme,
-                    language: this.language,
-                    maxRetryAttempts: this.maxRetryAttempts,
-                    timeout: this.timeout
-                };
-            }
         }
 
-        // Initialize singleton
-        const appConfig = new AppConfig();
-
-        function updateConfig() {
-            const newConfig = {
-                apiBaseUrl: document.getElementById('apiUrl').value,
-                theme: document.getElementById('appTheme').value
-            };
-            appConfig.updateConfig(newConfig);
-        }
-
-        function showConfig() {
-            const config = appConfig.getConfig();
-            showNotification(
-                `Current Config: ${config.theme} theme, API: ${config.apiBaseUrl}`,
-                'info'
-            );
-        }
+        
 
         // ===============================
+
         // 2. FACTORY PATTERN
+
         // ===============================
-        class OrderFactory {
-            createOrder(type, details) {
-                switch (type) {
-                    case 'pizza':
-                        return new PizzaOrder(details);
-                    case 'burger':
-                        return new BurgerOrder(details);
-                    case 'salad':
-                        return new SaladOrder(details);
+
+        class RestaurantFactory {
+
+            createRestaurant(type, name, rating) {
+
+                switch(type) {
+
+                    case 'veg':
+
+                        return new VegRestaurant(name, rating);
+
+                    case 'nonveg':
+
+                        return new NonVegRestaurant(name, rating);
+
+                    case 'vegan':
+
+                        return new VeganRestaurant(name, rating);
+
                     default:
-                        throw new Error('Unknown order type');
+
+                        throw new Error('Invalid restaurant type');
+
                 }
+
             }
+
         }
 
-        class PizzaOrder {
-            constructor(details) {
-                this.type = 'pizza';
-                this.name = 'Custom Pizza';
-                this.basePrice = 12.99;
-                this.toppings = details?.toppings || ['cheese', 'tomato sauce'];
-                this.size = details?.size || 'medium';
-                this.crust = details?.crust || 'regular';
+        
+
+        class VegRestaurant {
+
+            constructor(name, rating) {
+
+                this.type = 'Vegetarian';
+
+                this.name = name;
+
+                this.rating = rating;
+
+                this.specialty = 'Plant-based dishes';
+
             }
 
-            calculatePrice() {
-                let price = this.basePrice;
-                if (this.size === 'large') price += 4;
-                if (this.size === 'small') price -= 2;
-                price += this.toppings.length * 1.5;
-                return price;
-            }
-
-            getDescription() {
-                return `${this.size.toUpperCase()} ${this.name} with ${this.crust} crust and ${this.toppings.join(', ')}`;
-            }
-        }
-
-        class BurgerOrder {
-            constructor(details) {
-                this.type = 'burger';
-                this.name = 'Gourmet Burger';
-                this.basePrice = 8.99;
-                this.patty = details?.patty || 'beef';
-                this.cheese = details?.cheese || 'cheddar';
-                this.vegetables = details?.vegetables || ['lettuce', 'tomato', 'onion'];
-            }
-
-            calculatePrice() {
-                let price = this.basePrice;
-                if (this.patty === 'premium') price += 3;
-                if (this.cheese === 'premium') price += 2;
-                return price;
-            }
-
-            getDescription() {
-                return `${this.patty.toUpperCase()} Burger with ${this.cheese} cheese and ${this.vegetables.join(', ')}`;
-            }
-        }
-
-        class SaladOrder {
-            constructor(details) {
-                this.type = 'salad';
-                this.name = 'Fresh Salad';
-                this.basePrice = 6.99;
-                this.greens = details?.greens || ['lettuce', 'spinach'];
-                this.vegetables = details?.vegetables || ['cucumber', 'tomato', 'bell pepper'];
-                this.dressing = details?.dressing || 'vinaigrette';
-            }
-
-            calculatePrice() {
-                let price = this.basePrice;
-                price += this.vegetables.length * 0.5;
-                if (this.dressing === 'premium') price += 1.5;
-                return price;
-            }
-
-            getDescription() {
-                return `Fresh Salad with ${this.greens.join(', ')} base, ${this.vegetables.join(', ')} and ${this.dressing} dressing`;
-            }
-        }
-
-        const orderFactory = new OrderFactory();
-
-        function createOrder(type) {
-            const order = orderFactory.createOrder(type);
-            const orderDetails = document.getElementById('orderDetails');
-            const orderContent = document.getElementById('orderContent');
             
-            orderContent.innerHTML = `
-                <h4>${order.name}</h4>
-                <p><strong>Description:</strong> ${order.getDescription()}</p>
-                <p><strong>Price:</strong> $${order.calculatePrice().toFixed(2)}</p>
-                <p><strong>Estimated Time:</strong> 20-30 minutes</p>
-                <button class="btn btn-success" onclick="confirmOrder('${type}')">Confirm Order</button>
-            `;
-            
-            orderDetails.classList.remove('hidden');
-            showNotification(`${type.charAt(0).toUpperCase() + type.slice(1)} order created!`, 'success');
+
+            getDescription() {
+
+                return ${this.name} - ${this.type} Restaurant (Rating: ${this.rating}/5) - Specialty: ${this.specialty};
+
+            }
+
         }
 
-        function confirmOrder(type) {
-            showNotification(`Your ${type} order has been confirmed and is being prepared! 🎉`, 'success');
+        
+
+        class NonVegRestaurant {
+
+            constructor(name, rating) {
+
+                this.type = 'Non-Vegetarian';
+
+                this.name = name;
+
+                this.rating = rating;
+
+                this.specialty = 'Meat and seafood dishes';
+
+            }
+
+            
+
+            getDescription() {
+
+                return ${this.name} - ${this.type} Restaurant (Rating: ${this.rating}/5) - Specialty: ${this.specialty};
+
+            }
+
         }
+
+        
+
+        class VeganRestaurant {
+
+            constructor(name, rating) {
+
+                this.type = 'Vegan';
+
+                this.name = name;
+
+                this.rating = rating;
+
+                this.specialty = '100% plant-based, no animal products';
+
+            }
+
+            
+
+            getDescription() {
+
+                return ${this.name} - ${this.type} Restaurant (Rating: ${this.rating}/5) - Specialty: ${this.specialty};
+
+            }
+
+        }
+
+        
 
         // ===============================
+
         // 3. ABSTRACT FACTORY PATTERN
+
         // ===============================
+
+        class PaymentMethod {
+
+            processPayment(amount) {
+
+                throw new Error('Method not implemented');
+
+            }
+
+        }
+
+        
+
+        class UPIPayment extends PaymentMethod {
+
+            processPayment(amount) {
+
+                return Processing UPI payment of ${amount};
+
+            }
+
+        }
+
+        
+
+        class WalletPayment extends PaymentMethod {
+
+            processPayment(amount) {
+
+                return Processing Wallet payment of ${amount};
+
+            }
+
+        }
+
+        
+
+        class CreditCardPayment extends PaymentMethod {
+
+            processPayment(amount) {
+
+                return Processing Credit Card payment of ${amount};
+
+            }
+
+        }
+
+        
+
+        class PayPalPayment extends PaymentMethod {
+
+            processPayment(amount) {
+
+                return Processing PayPal payment of ${amount};
+
+            }
+
+        }
+
+        
+
         class PaymentFactory {
-            createPaymentProcessor(type) {
-                switch (type) {
-                    case 'upi':
-                        return new UpiPayment();
-                    case 'wallet':
-                        return new WalletPayment();
-                    case 'card':
-                        return new CardPayment();
-                    case 'cod':
-                        return new CODPayment();
-                    default:
-                        throw new Error('Unknown payment type');
-                }
-            }
-        }
 
-        class UpiPayment {
-            processPayment(amount) {
-                return {
-                    success: true,
-                    transactionId: 'UPI_' + Math.random().toString(36).substr(2, 9),
-                    message: `UPI payment of $${amount} processed successfully`,
-                    method: 'UPI'
-                };
+            createUPIPayment() {
+
+                throw new Error('Method not implemented');
+
             }
 
-            refundPayment(transactionId) {
-                return {
-                    success: true,
-                    message: `Refund processed for UPI transaction ${transactionId}`
-                };
-            }
-        }
-
-        class WalletPayment {
-            processPayment(amount) {
-                return {
-                    success: true,
-                    transactionId: 'WALLET_' + Math.random().toString(36).substr(2, 9),
-                    message: `Wallet payment of $${amount} processed successfully`,
-                    method: 'Wallet'
-                };
-            }
-
-            refundPayment(transactionId) {
-                return {
-                    success: true,
-                    message: `Refund processed to wallet for transaction ${transactionId}`
-                };
-            }
-        }
-
-        class CardPayment {
-            processPayment(amount) {
-                return {
-                    success: true,
-                    transactionId: 'CARD_' + Math.random().toString(36).substr(2, 9),
-                    message: `Card payment of $${amount} processed successfully`,
-                    method: 'Credit/Debit Card'
-                };
-            }
-
-            refundPayment(transactionId) {
-                return {
-                    success: true,
-                    message: `Refund processed to card for transaction ${transactionId}`
-                };
-            }
-        }
-
-        class CODPayment {
-            processPayment(amount) {
-                return {
-                    success: true,
-                    transactionId: 'COD_' + Math.random().toString(36).substr(2, 9),
-                    message: `Order confirmed with Cash on Delivery - $${amount}`,
-                    method: 'Cash on Delivery'
-                };
-            }
-
-            refundPayment(transactionId) {
-                return {
-                    success: false,
-                    message: 'Refunds not applicable for COD orders'
-                };
-            }
-        }
-
-        const paymentFactory = new PaymentFactory();
-        let selectedPaymentMethod = null;
-
-        function selectPayment(method) {
-            selectedPaymentMethod = method;
-            const options = document.querySelectorAll('.payment-option');
-            options.forEach(opt => opt.classList.remove('selected'));
-            event.currentTarget.classList.add('selected');
-            document.getElementById('processPaymentBtn').disabled = false;
-        }
-
-        function processPayment() {
-            if (!selectedPaymentMethod) {
-                showNotification('Please select a payment method', 'error');
-                return;
-            }
-
-            const amount = 25.99; // Simulated order amount
-            const processor = paymentFactory.createPaymentProcessor(selectedPaymentMethod);
-            const result = processor.processPayment(amount);
             
-            const paymentResult = document.getElementById('paymentResult');
-            paymentResult.innerHTML = `
-                <h4>Payment Result</h4>
-                <p><strong>Status:</strong> ${result.success ? '✅ Success' : '❌ Failed'}</p>
-                <p><strong>Method:</strong> ${result.method}</p>
-                <p><strong>Amount:</strong> $${amount}</p>
-                <p><strong>Transaction ID:</strong> ${result.transactionId}</p>
-                <p><strong>Message:</strong> ${result.message}</p>
-            `;
-            paymentResult.classList.remove('hidden');
+
+            createWalletPayment() {
+
+                throw new Error('Method not implemented');
+
+            }
+
             
-            showNotification(result.message, result.success ? 'success' : 'error');
+
+            createCreditCardPayment() {
+
+                throw new Error('Method not implemented');
+
+            }
+
         }
+
+        
+
+        class IndianPaymentFactory extends PaymentFactory {
+
+            createUPIPayment() {
+
+                return new UPIPayment();
+
+            }
+
+            
+
+            createWalletPayment() {
+
+                return new WalletPayment();
+
+            }
+
+            
+
+            createCreditCardPayment() {
+
+                return new CreditCardPayment();
+
+            }
+
+        }
+
+        
+
+        class USPaymentFactory extends PaymentFactory {
+
+            createUPIPayment() {
+
+                return new PayPalPayment(); // US uses PayPal instead of UPI
+
+            }
+
+            
+
+            createWalletPayment() {
+
+                return new WalletPayment();
+
+            }
+
+            
+
+            createCreditCardPayment() {
+
+                return new CreditCardPayment();
+
+            }
+
+        }
+
+        
+
+        class EuropeanPaymentFactory extends PaymentFactory {
+
+            createUPIPayment() {
+
+                return new PayPalPayment(); // Europe uses PayPal
+
+            }
+
+            
+
+            createWalletPayment() {
+
+                return new WalletPayment();
+
+            }
+
+            
+
+            createCreditCardPayment() {
+
+                return new CreditCardPayment();
+
+            }
+
+        }
+
+        
 
         // ===============================
+
         // 4. BUILDER PATTERN
+
         // ===============================
-        class MealBuilder {
+
+        class Meal {
+
             constructor() {
-            this.meal = new Meal();
+
+                this.mainCourse = '';
+
+                this.sideDish = '';
+
+                this.beverage = '';
+
+                this.dessert = '';
+
+                this.price = 0;
+
+            }
+
+            
+
+            describe() {
+
+                let description = Meal: ${this.mainCourse} with ${this.sideDish};
+
+                if (this.beverage) description += , ${this.beverage};
+
+                if (this.dessert && this.dessert !== 'none') description += , and ${this.dessert};
+
+                description +=  - Total: ₹${this.price};
+
+                return description;
+
+            }
+
         }
 
-        setMainCourse(mainCourse) {
-            this.meal.mainCourse = mainCourse;
-            return this;
-        }
-
-        setSideDish(sideDish) {
-            this.meal.sideDish = sideDish;
-            return this;
-        }
-
-        setBeverage(beverage) {
-            this.meal.beverage = beverage;
-            return this;
-        }
-
-        setDessert(dessert) {
-            this.meal.dessert = dessert;
-            return this;
-        }
-
-        build() {
-            return this.meal;
-        }
-    }
-
-    class Meal {
-        constructor() {
-            this.mainCourse = '';
-            this.sideDish = '';
-            this.beverage = '';
-            this.dessert = '';
-            this.price = 0;
-        }
-
-        calculatePrice() {
-            let total = 0;
-            const prices = {
-                'grilled_chicken': 8.99,
-                'paneer_tikka': 7.99,
-                'fish_fillet': 9.99,
-                'french_fries': 2.99,
-                'garlic_bread': 3.49,
-                'steamed_vegetables': 2.49,
-                'coke': 1.99,
-                'lemonade': 2.49,
-                'iced_tea': 2.99,
-                'chocolate_cake': 4.99,
-                'ice_cream': 3.99,
-                'fruit_salad': 3.49
-            };
-
-            if (this.mainCourse) total += prices[this.mainCourse] || 0;
-            if (this.sideDish) total += prices[this.sideDish] || 0;
-            if (this.beverage) total += prices[this.beverage] || 0;
-            if (this.dessert) total += prices[this.dessert] || 0;
-
-            this.price = total;
-            return total;
-        }
-
-        getDescription() {
-            const parts = [];
-            if (this.mainCourse) parts.push(`Main: ${this.formatName(this.mainCourse)}`);
-            if (this.sideDish) parts.push(`Side: ${this.formatName(this.sideDish)}`);
-            if (this.beverage) parts.push(`Drink: ${this.formatName(this.beverage)}`);
-            if (this.dessert) parts.push(`Dessert: ${this.formatName(this.dessert)}`);
-            return parts.join(' | ');
-        }
-
-        formatName(name) {
-            return name.split('_').map(word => 
-                word.charAt(0).toUpperCase() + word.slice(1)
-            ).join(' ');
-        }
-    }
-
-    function buildMeal() {
-        const mainCourse = document.getElementById('mainCourse').value;
-        const sideDish = document.getElementById('sideDish').value;
-        const beverage = document.getElementById('beverage').value;
-        const dessert = document.getElementById('dessert').value;
-
-        if (!mainCourse) {
-            showNotification('Please select a main course', 'error');
-            return;
-        }
-
-        const builder = new MealBuilder();
-        const meal = builder
-            .setMainCourse(mainCourse)
-            .setSideDish(sideDish)
-            .setBeverage(beverage)
-            .setDessert(dessert)
-            .build();
-
-        const totalPrice = meal.calculatePrice();
-
-        const mealResult = document.getElementById('mealResult');
-        mealResult.innerHTML = `
-            <h4>Your Custom Meal</h4>
-            <p><strong>Description:</strong> ${meal.getDescription()}</p>
-            <p><strong>Total Price:</strong> $${totalPrice.toFixed(2)}</p>
-            <p><strong>Nutrition Info:</strong> Balanced meal with proteins, carbs, and vitamins</p>
-            <button class="btn btn-success" onclick="addToCart()">Add to Cart</button>
-        `;
-        mealResult.classList.remove('hidden');
-
-        showNotification('Custom meal built successfully!', 'success');
-    }
-
-    function addToCart() {
-        showNotification('Meal added to cart! 🛒', 'success');
-    }
-
-    // ===============================
-    // 5. PROTOTYPE PATTERN
-    // ===============================
-    class OrderTemplate {
-        constructor(name, items, basePrice) {
-            this.name = name;
-            this.items = items;
-            this.basePrice = basePrice;
-            this.customizations = [];
-        }
-
-        clone() {
-            const cloned = Object.create(Object.getPrototypeOf(this));
-            Object.assign(cloned, this);
-            cloned.items = [...this.items];
-            cloned.customizations = [...this.customizations];
-            return cloned;
-        }
-
-        customize(additionalItems) {
-            this.customizations.push(...additionalItems);
-        }
-
-        getTotalPrice() {
-            return this.basePrice + (this.customizations.length * 2.99);
-        }
-
-        getDescription() {
-            const allItems = [...this.items, ...this.customizations];
-            return `${this.name}: ${allItems.join(' + ')} | Total: $${this.getTotalPrice().toFixed(2)}`;
-        }
-    }
-
-    // Prototype templates
-    const orderTemplates = {
-        quickLunch: new OrderTemplate('Quick Lunch', 
-            ['Sandwich', 'Chips', 'Soda'], 9.99),
-        familyDinner: new OrderTemplate('Family Dinner',
-            ['Large Pizza', 'Garlic Bread', 'Salad', 'Dessert'], 29.99),
-        healthyChoice: new OrderTemplate('Healthy Choice',
-            ['Grilled Chicken', 'Brown Rice', 'Steamed Vegetables'], 14.99)
-    };
-
-    function cloneOrderTemplate(templateName) {
-        const template = orderTemplates[templateName];
-        if (!template) {
-            showNotification('Template not found', 'error');
-            return;
-        }
-
-        const clonedOrder = template.clone();
         
-        // Simulate some customization
-        const customizations = ['Extra Sauce', 'Diet Coke'];
-        clonedOrder.customize(customizations);
 
-        const templateResult = document.getElementById('templateResult');
-        const templateContent = document.getElementById('templateContent');
+        class MealBuilder {
+
+            constructor() {
+
+                this.meal = new Meal();
+
+            }
+
+            
+
+            addMainCourse(mainCourse) {
+
+                this.meal.mainCourse = mainCourse;
+
+                this.meal.price += 200;
+
+                return this;
+
+            }
+
+            
+
+            addSideDish(sideDish) {
+
+                this.meal.sideDish = sideDish;
+
+                this.meal.price += 50;
+
+                return this;
+
+            }
+
+            
+
+            addBeverage(beverage) {
+
+                this.meal.beverage = beverage;
+
+                this.meal.price += 30;
+
+                return this;
+
+            }
+
+            
+
+            addDessert(dessert) {
+
+                if (dessert !== 'none') {
+
+                    this.meal.dessert = dessert;
+
+                    this.meal.price += 80;
+
+                }
+
+                return this;
+
+            }
+
+            
+
+            build() {
+
+                return this.meal;
+
+            }
+
+        }
+
         
-        templateContent.innerHTML = `
-            <h4>${clonedOrder.name}</h4>
-            <p><strong>Original Items:</strong> ${template.items.join(', ')}</p>
-            <p><strong>Customizations:</strong> ${clonedOrder.customizations.join(', ')}</p>
-            <p><strong>Base Price:</strong> $${template.basePrice.toFixed(2)}</p>
-            <p><strong>Customization Cost:</strong> $${(clonedOrder.customizations.length * 2.99).toFixed(2)}</p>
-            <p><strong>Total Price:</strong> $${clonedOrder.getTotalPrice().toFixed(2)}</p>
-            <button class="btn btn-success" onclick="useClonedTemplate('${templateName}')">Use This Template</button>
-        `;
+
+        // ===============================
+
+        // 5. PROTOTYPE PATTERN
+
+        // ===============================
+
+        class Order {
+
+            constructor(restaurant, items, total, status) {
+
+                this.restaurant = restaurant;
+
+                this.items = items;
+
+                this.total = total;
+
+                this.status = status;
+
+                this.orderId = Math.random().toString(36).substr(2, 9).toUpperCase();
+
+                this.orderDate = new Date().toLocaleDateString();
+
+            }
+
+            
+
+            clone() {
+
+                const cloned = new Order(
+
+                    this.restaurant,
+
+                    [...this.items],
+
+                    this.total,
+
+                    this.status
+
+                );
+
+                cloned.orderId = Math.random().toString(36).substr(2, 9).toUpperCase();
+
+                cloned.orderDate = new Date().toLocaleDateString();
+
+                return cloned;
+
+            }
+
+            
+
+            getDescription() {
+
+                return Order #${this.orderId} from ${this.restaurant} - ${this.items.join(', ')} - Total: ₹${this.total} - Status: ${this.status};
+
+            }
+
+        }
+
         
-        templateResult.classList.remove('hidden');
-        showNotification(`${templateName} template cloned and customized!`, 'success');
-    }
 
-    function useClonedTemplate(templateName) {
-        showNotification(`Order placed using ${templateName} template! 🚀`, 'success');
-    }
+        // ===============================
 
-    // ===============================
-    // UTILITY FUNCTIONS
-    // ===============================
-    function showNotification(message, type) {
-        const notification = document.getElementById('notification');
-        notification.textContent = message;
-        notification.className = `notification ${type}`;
-        notification.classList.add('show');
-        
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 3000);
-    }
+        // APPLICATION LOGIC
 
-    // Initialize the application
-    document.addEventListener('DOMContentLoaded', function() {
-        showNotification('Welcome to FoodExpress! Explore different design patterns in action.', 'info');
-    });
+        // ===============================
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Initialize Singleton
+
+            const appConfig = new AppConfig();
+
+            
+
+            // DOM Elements
+
+            const tabs = document.querySelectorAll('.tab');
+
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            const restaurantsContainer = document.getElementById('restaurants-container');
+
+            const cartContainer = document.getElementById('cart-container');
+
+            const ordersContainer = document.getElementById('orders-container');
+
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            const checkoutModal = document.getElementById('checkout-modal');
+
+            const closeModalBtns = document.querySelectorAll('.close-modal');
+
+            const placeOrderBtn = document.getElementById('place-order-btn');
+
+            const notification = document.getElementById('notification');
+
+            const toggleThemeBtn = document.getElementById('toggle-theme');
+
+            const currentThemeSpan = document.getElementById('current-theme');
+
+            const createRestaurantBtn = document.getElementById('create-restaurant');
+
+            const factoryOutput = document.getElementById('factory-output');
+
+            const setupPaymentsBtn = document.getElementById('setup-payments');
+
+            const abstractFactoryOutput = document.getElementById('abstract-factory-output');
+
+            const openMealBuilderBtn = document.getElementById('open-meal-builder');
+
+            const mealBuilderModal = document.getElementById('meal-builder-modal');
+
+            const buildMealBtn = document.getElementById('build-meal-btn');
+
+            const builderOutput = document.getElementById('builder-output');
+
+            const cloneOptionsContainer = document.getElementById('clone-options');
+
+            const prototypeOutput = document.getElementById('prototype-output');
+
+            const loginBtn = document.getElementById('loginBtn');
+
+            const signupBtn = document.getElementById('signupBtn');
+
+            const loginModal = document.getElementById('login-modal');
+
+            const signupModal = document.getElementById('signup-modal');
+
+            const loginSubmitBtn = document.getElementById('login-submit');
+
+            const signupSubmitBtn = document.getElementById('signup-submit');
+
+            const switchToSignup = document.getElementById('switch-to-signup');
+
+            const switchToLogin = document.getElementById('switch-to-login');
+
+            const userProfile = document.getElementById('user-profile');
+
+            const authButtons = document.getElementById('auth-buttons');
+
+            const userAvatar = document.getElementById('user-avatar');
+
+            const usernameSpan = document.getElementById('username');
+
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            
+
+            // Sample data with food images
+
+            const restaurants = [
+
+                { 
+
+                    id: 1, 
+
+                    name: 'Spice Garden', 
+
+                    cuisine: 'Indian', 
+
+                    rating: 4.5, 
+
+                    deliveryTime: '30-40 min', 
+
+                    image: 'https://images.unsplash.com/photo-1517244683847-7456b63c5969?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5kaWFuJTIwcmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'
+
+                },
+
+                { 
+
+                    id: 2, 
+
+                    name: 'Pizza Palace', 
+
+                    cuisine: 'Italian', 
+
+                    rating: 4.2, 
+
+                    deliveryTime: '25-35 min', 
+
+                    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGl6emElMjByZXN0YXVyYW50fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'
+
+                },
+
+                { 
+
+                    id: 3, 
+
+                    name: 'Dragon Wok', 
+
+                    cuisine: 'Chinese', 
+
+                    rating: 4.3, 
+
+                    deliveryTime: '35-45 min', 
+
+                    image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hpbmVzZSUyMHJlc3RhdXJhbnR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
+
+                },
+
+                { 
+
+                    id: 4, 
+
+                    name: 'Burger Hub', 
+
+                    cuisine: 'American', 
+
+                    rating: 4.0, 
+
+                    deliveryTime: '20-30 min', 
+
+                    image: 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVyZ2VyJTIwcmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'
+
+                },
+
+                { 
+
+                    id: 5, 
+
+                    name: 'Sushi Spot', 
+
+                    cuisine: 'Japanese', 
+
+                    rating: 4.7, 
+
+                    deliveryTime: '40-50 min', 
+
+                    image: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VzaGklMjByZXN0YXVyYW50fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'
+
+                },
+
+                { 
+
+                    id: 6, 
+
+                    name: 'Taco Fiesta', 
+
+                    cuisine: 'Mexican', 
+
+                    rating: 4.1, 
+
+                    deliveryTime: '25-35 min', 
+
+                    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWV4aWNhbiUyMHJlc3RhdXJhbnR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
+
+                }
+
+            ];
+
+            
+
+            const menuItems = [
+
+                { id: 1, name: 'Butter Chicken', price: 320, restaurantId: 1, image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnV0dGVyJTIwY2hpY2tlbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60' },
+
+                { id: 2, name: 'Paneer Tikka', price: 280, restaurantId: 1, image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFuZWVyJTIwdGlra2F8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60' },
+
+                { id: 3, name: 'Margherita Pizza', price: 350, restaurantId: 2, image: 'https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFyZ2hlcml0YSUyMHBpenphfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60' },
+
+                { id: 4, name: 'Pepperoni Pizza', price: 420, restaurantId: 2, image: 'https://images.unsplash.com/photo-1627626775846-122c4c48409c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVwcGVyb25pJTIwcGl6emF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60' },
+
+                { id: 5, name: 'Kung Pao Chicken', price: 380, restaurantId: 3, image: 'https://images.unsplash.com/photo-1585032223-4756cb31c0d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a3VuZyUyMHBhbyUyMGNoaWNrZW58ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60' },
+
+                { id: 6, name: 'Veg Fried Rice', price: 220, restaurantId: 3, image: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZnJpZWQlMjByaWNlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60' },
+
+                { id: 7, name: 'Classic Burger', price: 180, restaurantId: 4, image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVyZ2VyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60' },
+
+                { id: 8, name: 'Cheese Burger', price: 220, restaurantId: 4, image: 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2hlZXNlJTIwYnVyZ2VyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60' },
+
+                { id: 9, name: 'California Roll', price: 450, restaurantId: 5, image: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VzaGl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60' },
+
+                { id: 10, name: 'Salmon Nigiri', price: 380, restaurantId: 5, image: 'https://images.unsplash.com/photo-1611143669185-af224c5e3252?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2FsbW9uJTIwc3VzaGl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60' },
+
+                { id: 11, name: 'Beef Tacos', price: 240, restaurantId: 6, image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGFjb3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60' },
+
+                { id: 12, name: 'Veg Quesadilla', price: 200, restaurantId: 6, image: 'https://images.unsplash.com/photo-1615874694520-474822394e73?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cXVlc2FkaWxsYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60' }
+
+            ];
+
+            
+
+            let cart = [];
+
+            let orders = [];
+
+            let currentUser = null;
+
+            
+
+            // Initialize sample orders for prototype pattern
+
+            const sampleOrders = [
+
+                new Order('Spice Garden', ['Butter Chicken', 'Naan'], 370, 'Delivered'),
+
+                new Order('Pizza Palace', ['Margherita Pizza', 'Garlic Bread'], 420, 'Delivered'),
+
+                new Order('Dragon Wok', ['Kung Pao Chicken', 'Fried Rice'], 600, 'Delivered')
+
+            ];
+
+            
+
+            // Tab switching
+
+            tabs.forEach(tab => {
+
+                tab.addEventListener('click', () => {
+
+                    const tabId = tab.getAttribute('data-tab');
+
+                    
+
+                    // Update active tab
+
+                    tabs.forEach(t => t.classList.remove('active'));
+
+                    tab.classList.add('active');
+
+                    
+
+                    // Show active tab content
+
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    document.getElementById${tabId}-tab).classList.add('active');
+
+                    
+
+                    // Refresh content if needed
+
+                    if (tabId === 'cart') {
+
+                        updateCartDisplay();
+
+                    } else if (tabId === 'orders') {
+
+                        updateOrdersDisplay();
+
+                    } else if (tabId === 'patterns') {
+
+                        updatePatternsDisplay();
+
+                    }
+
+                });
+
+            });
+
+            
+
+            // Display restaurants
+
+            function displayRestaurants() {
+
+                restaurantsContainer.innerHTML = '';
+
+                
+
+                restaurants.forEach(restaurant => {
+
+                    const restaurantCard = document.createElement('div');
+
+                    restaurantCard.className = 'restaurant-card';
+
+                    
+
+                    const restaurantMenu = menuItems.filter(item => item.restaurantId === restaurant.id);
+
+                    
+
+                    restaurantCard.innerHTML = `
+
+                        <div class="restaurant-img" style="background-image: url('${restaurant.image}')"></div>
+
+                        <div class="restaurant-info">
+
+                            <h3 class="restaurant-name">${restaurant.name}</h3>
+
+                            <p class="restaurant-cuisine">${restaurant.cuisine} • ${restaurant.deliveryTime}</p>
+
+                            <div class="restaurant-rating">
+
+                                <i class="fas fa-star"></i>
+
+                                <span>${restaurant.rating}</span>
+
+                            </div>
+
+                            <div style="margin-top: 1rem;">
+
+                                ${restaurantMenu.map(item => `
+
+                                    <div class="food-item">
+
+                                        <div>
+
+                                            <strong>${item.name}</strong>
+
+                                            <p>₹${item.price}</p>
+
+                                        </div>
+
+                                        <button class="btn btn-primary btn-sm add-to-cart" data-id="${item.id}" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;">Add</button>
+
+                                    </div>
+
+                                `).join('')}
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                    
+
+                    restaurantsContainer.appendChild(restaurantCard);
+
+                });
+
+                
+
+                // Add event listeners to "Add to Cart" buttons
+
+                document.querySelectorAll('.add-to-cart').forEach(button => {
+
+                    button.addEventListener('click', function() {
+
+                        const itemId = parseInt(this.getAttribute('data-id'));
+
+                        addToCart(itemId);
+
+                    });
+
+                });
+
+            }
+
+            
+
+            // Add item to cart
+
+            function addToCart(itemId) {
+
+                if (!currentUser) {
+
+                    showNotification('Please login to add items to cart!');
+
+                    loginModal.classList.add('show');
+
+                    return;
+
+                }
+
+                
+
+                const item = menuItems.find(i => i.id === itemId);
+
+                if (!item) return;
+
+                
+
+                const existingItem = cart.find(i => i.id === itemId);
+
+                
+
+                if (existingItem) {
+
+                    existingItem.quantity += 1;
+
+                } else {
+
+                    cart.push({
+
+                        id: item.id,
+
+                        name: item.name,
+
+                        price: item.price,
+
+                        restaurantId: item.restaurantId,
+
+                        image: item.image,
+
+                        quantity: 1
+
+                    });
+
+                }
+
+                
+
+                updateCartDisplay();
+
+                showNotification${item.name} added to cart!);
+
+            }
+
+            
+
+            // Update cart display
+
+            function updateCartDisplay() {
+
+                cartContainer.innerHTML = '';
+
+                
+
+                if (cart.length === 0) {
+
+                    cartContainer.innerHTML = '<p>Your cart is empty</p>';
+
+                    document.getElementById('checkout-btn').disabled = true;
+
+                    return;
+
+                }
+
+                
+
+                document.getElementById('checkout-btn').disabled = false;
+
+                
+
+                cart.forEach(item => {
+
+                    const cartItem = document.createElement('div');
+
+                    cartItem.className = 'cart-item';
+
+                    
+
+                    cartItem.innerHTML = `
+
+                        <div class="cart-img" style="background-image: url('${item.image}')"></div>
+
+                        <div class="cart-details">
+
+                            <h4>${item.name}</h4>
+
+                            <p>₹${item.price}</p>
+
+                            <div class="cart-controls">
+
+                                <button class="quantity-btn decrease" data-id="${item.id}">-</button>
+
+                                <span>${item.quantity}</span>
+
+                                <button class="quantity-btn increase" data-id="${item.id}">+</button>
+
+                                <button class="btn btn-outline remove" data-id="${item.id}" style="margin-left: auto;">Remove</button>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                    
+
+                    cartContainer.appendChild(cartItem);
+
+                });
+
+                
+
+                // Add event listeners to quantity buttons
+
+                document.querySelectorAll('.increase').forEach(button => {
+
+                    button.addEventListener('click', function() {
+
+                        const itemId = parseInt(this.getAttribute('data-id'));
+
+                        const item = cart.find(i => i.id === itemId);
+
+                        if (item) item.quantity += 1;
+
+                        updateCartDisplay();
+
+                    });
+
+                });
+
+                
+
+                document.querySelectorAll('.decrease').forEach(button => {
+
+                    button.addEventListener('click', function() {
+
+                        const itemId = parseInt(this.getAttribute('data-id'));
+
+                        const item = cart.find(i => i.id === itemId);
+
+                        if (item) {
+
+                            item.quantity -= 1;
+
+                            if (item.quantity <= 0) {
+
+                                cart = cart.filter(i => i.id !== itemId);
+
+                            }
+
+                        }
+
+                        updateCartDisplay();
+
+                    });
+
+                });
+
+                
+
+                document.querySelectorAll('.remove').forEach(button => {
+
+                    button.addEventListener('click', function() {
+
+                        const itemId = parseInt(this.getAttribute('data-id'));
+
+                        cart = cart.filter(i => i.id !== itemId);
+
+                        updateCartDisplay();
+
+                    });
+
+                });
+
+                
+
+                // Update order summary
+
+                updateOrderSummary();
+
+            }
+
+            
+
+            // Update order summary
+
+            function updateOrderSummary() {
+
+                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+                const tax = subtotal * 0.05; // 5% tax
+
+                const deliveryFee = 40;
+
+                const total = subtotal + tax + deliveryFee;
+
+                
+
+                document.getElementById('subtotal').textContent = ₹${subtotal};
+
+                document.getElementById('tax').textContent = ₹${tax.toFixed(2)};
+
+                document.getElementById('total').textContent = ₹${(subtotal + tax + deliveryFee).toFixed(2)};
+
+            }
+
+            
+
+            // Update orders display
+
+            function updateOrdersDisplay() {
+
+                ordersContainer.innerHTML = '';
+
+                
+
+                if (orders.length === 0) {
+
+                    ordersContainer.innerHTML = '<p>No orders yet</p>';
+
+                    return;
+
+                }
+
+                
+
+                orders.forEach(order => {
+
+                    const restaurant = restaurants.find(r => r.name === order.restaurant);
+
+                    const orderCard = document.createElement('div');
+
+                    orderCard.className = 'order-card';
+
+                    
+
+                    orderCard.innerHTML = `
+
+                        <div class="restaurant-img" style="background-image: url('${restaurant ? restaurant.image : ''}')"></div>
+
+                        <div class="order-info">
+
+                            <h3 class="restaurant-name">Order #${order.orderId}</h3>
+
+                            <p>${order.restaurant}</p>
+
+                            <p>${order.items.join(', ')}</p>
+
+                            <p><strong>Total: ₹${order.total}</strong></p>
+
+                            <p>Status: ${order.status}</p>
+
+                            <p>Date: ${order.orderDate}</p>
+
+                        </div>
+
+                    `;
+
+                    
+
+                    ordersContainer.appendChild(orderCard);
+
+                });
+
+            }
+
+            
+
+            // Update patterns display
+
+            function updatePatternsDisplay() {
+
+                // Update clone options for prototype pattern
+
+                cloneOptionsContainer.innerHTML = '';
+
+                sampleOrders.forEach((order, index) => {
+
+                    const cloneOption = document.createElement('div');
+
+                    cloneOption.className = 'clone-option';
+
+                    cloneOption.innerHTML = order.getDescription();
+
+                    cloneOption.setAttribute('data-index', index);
+
+                    cloneOptionsContainer.appendChild(cloneOption);
+
+                });
+
+                
+
+                // Add event listeners to clone options
+
+                document.querySelectorAll('.clone-option').forEach(option => {
+
+                    option.addEventListener('click', function() {
+
+                        const index = parseInt(this.getAttribute('data-index'));
+
+                        const originalOrder = sampleOrders[index];
+
+                        const clonedOrder = originalOrder.clone();
+
+                        
+
+                        prototypeOutput.innerHTML = `
+
+                            <p><strong>Original Order:</strong> ${originalOrder.getDescription()}</p>
+
+                            <p><strong>Cloned Order:</strong> ${clonedOrder.getDescription()}</p>
+
+                            <p>Note: The cloned order has a new order ID and date.</p>
+
+                        `;
+
+                    });
+
+                });
+
+            }
+
+            
+
+            // Show notification
+
+            function showNotification(message) {
+
+                document.getElementById('notification-text').textContent = message;
+
+                notification.classList.add('show');
+
+                
+
+                setTimeout(() => {
+
+                    notification.classList.remove('show');
+
+                }, 3000);
+
+            }
+
+            
+
+            // Checkout button click
+
+            checkoutBtn.addEventListener('click', () => {
+
+                if (!currentUser) {
+
+                    showNotification('Please login to checkout!');
+
+                    loginModal.classList.add('show');
+
+                    return;
+
+                }
+
+                
+
+                if (cart.length === 0) {
+
+                    showNotification('Your cart is empty!');
+
+                    return;
+
+                }
+
+                
+
+                // Setup payment methods based on region (default India)
+
+                setupPaymentMethods('india');
+
+                checkoutModal.classList.add('show');
+
+            });
+
+            
+
+            // Setup payment methods based on region
+
+            function setupPaymentMethods(region) {
+
+                const paymentMethodsContainer = document.getElementById('payment-methods');
+
+                paymentMethodsContainer.innerHTML = '';
+
+                
+
+                let paymentFactory;
+
+                
+
+                switch(region) {
+
+                    case 'india':
+
+                        paymentFactory = new IndianPaymentFactory();
+
+                        break;
+
+                    case 'us':
+
+                        paymentFactory = new USPaymentFactory();
+
+                        break;
+
+                    case 'europe':
+
+                        paymentFactory = new EuropeanPaymentFactory();
+
+                        break;
+
+                    default:
+
+                        paymentFactory = new IndianPaymentFactory();
+
+                }
+
+                
+
+                const upiPayment = paymentFactory.createUPIPayment();
+
+                const walletPayment = paymentFactory.createWalletPayment();
+
+                const creditCardPayment = paymentFactory.createCreditCardPayment();
+
+                
+
+                const paymentMethods = [
+
+                    { id: 'upi', name: 'UPI', icon: 'fa-mobile-alt', method: upiPayment },
+
+                    { id: 'wallet', name: 'Wallet', icon: 'fa-wallet', method: walletPayment },
+
+                    { id: 'credit-card', name: 'Credit Card', icon: 'fa-credit-card', method: creditCardPayment },
+
+                    { id: 'cod', name: 'Cash on Delivery', icon: 'fa-money-bill', method: null }
+
+                ];
+
+                
+
+                paymentMethods.forEach(payment => {
+
+                    const paymentMethod = document.createElement('div');
+
+                    paymentMethod.className = 'payment-method';
+
+                    paymentMethod.setAttribute('data-method', payment.id);
+
+                    
+
+                    paymentMethod.innerHTML = `
+
+                        <div class="payment-icon">
+
+                            <i class="fas ${payment.icon}"></i>
+
+                        </div>
+
+                        <h4>${payment.name}</h4>
+
+                    `;
+
+                    
+
+                    paymentMethod.addEventListener('click', function() {
+
+                        document.querySelectorAll('.payment-method').forEach(pm => {
+
+                            pm.classList.remove('selected');
+
+                        });
+
+                        this.classList.add('selected');
+
+                    });
+
+                    
+
+                    paymentMethodsContainer.appendChild(paymentMethod);
+
+                });
+
+            }
+
+            
+
+            // Place order button click
+
+            placeOrderBtn.addEventListener('click', () => {
+
+                const selectedPayment = document.querySelector('.payment-method.selected');
+
+                
+
+                if (!selectedPayment) {
+
+                    showNotification('Please select a payment method!');
+
+                    return;
+
+                }
+
+                
+
+                const paymentMethod = selectedPayment.getAttribute('data-method');
+
+                const address = document.getElementById('delivery-address').value;
+
+                
+
+                if (!address) {
+
+                    showNotification('Please enter delivery address!');
+
+                    return;
+
+                }
+
+                
+
+                // Calculate total
+
+                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+                const tax = subtotal * 0.05;
+
+                const deliveryFee = 40;
+
+                const total = subtotal + tax + deliveryFee;
+
+                
+
+                // Get restaurant name from first item in cart
+
+                const restaurantId = cart[0].restaurantId;
+
+                const restaurant = restaurants.find(r => r.id === restaurantId);
+
+                
+
+                // Create new order
+
+                const order = new Order(
+
+                    restaurant.name,
+
+                    cart.map(item => ${item.quantity}x ${item.name}),
+
+                    total.toFixed(2),
+
+                    'Confirmed'
+
+                );
+
+                
+
+                orders.push(order);
+
+                
+
+                // Clear cart
+
+                cart = [];
+
+                updateCartDisplay();
+
+                
+
+                // Close modal
+
+                checkoutModal.classList.remove('show');
+
+                
+
+                // Show notification
+
+                showNotification('Order placed successfully!');
+
+                
+
+                // Switch to orders tab
+
+                document.querySelector('.tab[data-tab="orders"]').click();
+
+            });
+
+            
+
+            // Close modal buttons
+
+            closeModalBtns.forEach(btn => {
+
+                btn.addEventListener('click', function() {
+
+                    this.closest('.modal').classList.remove('show');
+
+                });
+
+            });
+
+            
+
+            // Toggle theme (Singleton pattern demo)
+
+            toggleThemeBtn.addEventListener('click', () => {
+
+                const currentTheme = appConfig.getTheme();
+
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+                appConfig.setTheme(newTheme);
+
+                currentThemeSpan.textContent = newTheme.charAt(0).toUpperCase() + newTheme.slice(1);
+
+            });
+
+            
+
+            // Create restaurant (Factory pattern demo)
+
+            createRestaurantBtn.addEventListener('click', () => {
+
+                const restaurantType = document.getElementById('restaurant-type').value;
+
+                const factory = new RestaurantFactory();
+
+                const names = ['Green Bites', 'Spice Route', 'Urban Kitchen', 'Flavor Fusion'];
+
+                const randomName = names[Math.floor(Math.random() * names.length)];
+
+                const randomRating = (Math.random() * 1 + 4).toFixed(1); // Rating between 4.0 and 5.0
+
+                
+
+                const restaurant = factory.createRestaurant(restaurantType, randomName, randomRating);
+
+                factoryOutput.innerHTML = <p>${restaurant.getDescription()}</p>;
+
+            });
+
+            
+
+            // Setup payments (Abstract Factory pattern demo)
+
+            setupPaymentsBtn.addEventListener('click', () => {
+
+                const region = document.getElementById('payment-region').value;
+
+                let paymentFactory;
+
+                
+
+                switch(region) {
+
+                    case 'india':
+
+                        paymentFactory = new IndianPaymentFactory();
+
+                        break;
+
+                    case 'us':
+
+                        paymentFactory = new USPaymentFactory();
+
+                        break;
+
+                    case 'europe':
+
+                        paymentFactory = new EuropeanPaymentFactory();
+
+                        break;
+
+                }
+
+                
+
+                const upiPayment = paymentFactory.createUPIPayment();
+
+                const walletPayment = paymentFactory.createWalletPayment();
+
+                const creditCardPayment = paymentFactory.createCreditCardPayment();
+
+                
+
+                abstractFactoryOutput.innerHTML = `
+
+                    <p><strong>Payment Methods for ${region.toUpperCase()}:</strong></p>
+
+                    <p>• ${upiPayment.processPayment('₹250')}</p>
+
+                    <p>• ${walletPayment.processPayment('₹250')}</p>
+
+                    <p>• ${creditCardPayment.processPayment('₹250')}</p>
+
+                `;
+
+            });
+
+            
+
+            // Open meal builder modal
+
+            openMealBuilderBtn.addEventListener('click', () => {
+
+                mealBuilderModal.classList.add('show');
+
+            });
+
+            
+
+            // Build meal (Builder pattern demo)
+
+            buildMealBtn.addEventListener('click', () => {
+
+                const mainCourse = document.getElementById('main-course').value;
+
+                const sideDish = document.getElementById('side-dish').value;
+
+                const beverage = document.getElementById('beverage').value;
+
+                const dessert = document.getElementById('dessert').value;
+
+                
+
+                const mealBuilder = new MealBuilder();
+
+                const meal = mealBuilder
+
+                    .addMainCourse(mainCourse)
+
+                    .addSideDish(sideDish)
+
+                    .addBeverage(beverage)
+
+                    .addDessert(dessert)
+
+                    .build();
+
+                
+
+                builderOutput.innerHTML = <p>${meal.describe()}</p>;
+
+                mealBuilderModal.classList.remove('show');
+
+            });
+
+            
+
+            // Authentication functions
+
+            function loginUser(email, password) {
+
+                // Simulate authentication - in a real app, this would be an API call
+
+                if (email && password) {
+
+                    currentUser = {
+
+                        name: email.split('@')[0],
+
+                        email: email,
+
+                        avatar: email.charAt(0).toUpperCase()
+
+                    };
+
+                    
+
+                    updateUserInterface();
+
+                    loginModal.classList.remove('show');
+
+                    showNotification('Login successful!');
+
+                    return true;
+
+                }
+
+                return false;
+
+            }
+
+            
+
+            function signupUser(name, email, password, phone) {
+
+                // Simulate user registration - in a real app, this would be an API call
+
+                if (name && email && password && phone) {
+
+                    currentUser = {
+
+                        name: name,
+
+                        email: email,
+
+                        avatar: name.charAt(0).toUpperCase()
+
+                    };
+
+                    
+
+                    updateUserInterface();
+
+                    signupModal.classList.remove('show');
+
+                    showNotification('Account created successfully!');
+
+                    return true;
+
+                }
+
+                return false;
+
+            }
+
+            
+
+            function logoutUser() {
+
+                currentUser = null;
+
+                cart = [];
+
+                updateUserInterface();
+
+                updateCartDisplay();
+
+                showNotification('Logged out successfully!');
+
+            }
+
+            
+
+            function updateUserInterface() {
+
+                if (currentUser) {
+
+                    userProfile.style.display = 'flex';
+
+                    authButtons.style.display = 'none';
+
+                    userAvatar.textContent = currentUser.avatar;
+
+                    usernameSpan.textContent = currentUser.name;
+
+                } else {
+
+                    userProfile.style.display = 'none';
+
+                    authButtons.style.display = 'flex';
+
+                }
+
+            }
+
+            
+
+            // Authentication event listeners
+
+            loginBtn.addEventListener('click', () => {
+
+                loginModal.classList.add('show');
+
+            });
+
+            
+
+            signupBtn.addEventListener('click', () => {
+
+                signupModal.classList.add('show');
+
+            });
+
+            
+
+            loginSubmitBtn.addEventListener('click', () => {
+
+                const email = document.getElementById('login-email').value;
+
+                const password = document.getElementById('login-password').value;
+
+                
+
+                if (!email || !password) {
+
+                    showNotification('Please fill in all fields!');
+
+                    return;
+
+                }
+
+                
+
+                loginUser(email, password);
+
+            });
+
+            
+
+            signupSubmitBtn.addEventListener('click', () => {
+
+                const name = document.getElementById('signup-name').value;
+
+                const email = document.getElementById('signup-email').value;
+
+                const password = document.getElementById('signup-password').value;
+
+                const phone = document.getElementById('signup-phone').value;
+
+                
+
+                if (!name || !email || !password || !phone) {
+
+                    showNotification('Please fill in all fields!');
+
+                    return;
+
+                }
+
+                
+
+                signupUser(name, email, password, phone);
+
+            });
+
+            
+
+            switchToSignup.addEventListener('click', () => {
+
+                loginModal.classList.remove('show');
+
+                signupModal.classList.add('show');
+
+            });
+
+            
+
+            switchToLogin.addEventListener('click', () => {
+
+                signupModal.classList.remove('show');
+
+                loginModal.classList.add('show');
+
+            });
+
+            
+
+            logoutBtn.addEventListener('click', () => {
+
+                logoutUser();
+
+            });
+
+            
+
+            // Initialize the app
+
+            displayRestaurants();
+
+            updateCartDisplay();
+
+            updateOrdersDisplay();
+
+            updatePatternsDisplay();
+
+            updateUserInterface();
+
+        });
+
     </script>
+
 </body>
+
 </html>
